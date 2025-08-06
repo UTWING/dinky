@@ -1,0 +1,788 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Digital art portfolio of Dinky Ramos featuring lightscapes, digital paintings and concept art." />
+  <title>Dinky Ramos — Digital Artist Portfolio</title>
+
+  <!-- Preload critical resources -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" as="style">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎨</text></svg>">
+
+  <style>
+
+@media (max-width: 768px) {
+  .site-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+    gap: 10px;
+  }
+
+  .center-nav {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 10px;
+  }
+
+  .links-right {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    gap: 6px;
+  }
+
+  .hero {
+    padding: 140px 20px 40px;
+  }
+
+  .hero-card {
+    padding: 30px 20px;
+  }
+
+  .headline {
+    font-size: clamp(1.75rem, 6vw, 2.25rem);
+  }
+
+  .sub {
+    font-size: 0.95rem;
+  }
+
+  .section {
+    padding: 2rem 1.5rem;
+  }
+
+  .section-title {
+    font-size: 1.4rem;
+  }
+
+  .notes-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .general-info-grid {
+    padding: 0 1rem;
+  }
+
+  .price-sticker {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .sale-badge {
+    margin-top: 0.3rem;
+  }
+
+  .contact-click {
+    display: inline-block;
+    word-break: break-word;
+  }
+
+  .lightbox-close {
+    top: -20px;
+    right: -10px;
+  }
+}
+
+.hide-header {
+  transform: translateY(-100%);
+  transition: transform 0.3s ease;
+}
+
+
+    :root {
+      --bg: #0b0b0b;
+      --card: #111;
+      --muted: rgba(255,255,255,0.55);
+      --accent: #f0c65a;
+      --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      min-height: 100vh;
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color: #fff;
+      background: linear-gradient(180deg, #070707 0%, #0f0f0f 60%);
+      line-height: 1.5;
+    }
+
+    /* HEADER / NAV */
+    .site-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 30px 48px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 40;
+      background: linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.15));
+      backdrop-filter: blur(6px);
+      transition: all var(--transition);
+    }
+    .site-header.scrolled { padding: 16px 48px; background: rgba(11, 11, 11, 0.9); }
+
+    .brand { text-align: left; }
+    .brand .name { font-weight: 700; letter-spacing: -0.02em; font-size: 1.25rem; }
+    .brand .title { font-size: 0.8125rem; color: var(--muted); margin-top: 4px; }
+
+    .center-nav { margin: auto; display: flex; gap: 14px; align-items: center; justify-content: center; }
+    .nav-pill {
+      background: rgba(255,255,255,0.03);
+      border-radius: 999px;
+      padding: 10px 18px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.85);
+      box-shadow: 0 6px 30px rgba(0,0,0,0.6);
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .nav-pill:hover { background: rgba(255,255,255,0.08); }
+    .nav-pill.inactive { opacity: 0.6; }
+
+    .links-right { display: flex; gap: 14px; align-items: center; }
+    .ext-link { font-size: 0.8125rem; color: var(--muted); text-decoration: none; opacity: 0.9; transition: all var(--transition); }
+    .ext-link:hover { opacity: 1; color: var(--accent); }
+
+    /* HERO */
+    .hero { min-height: 72vh; display: flex; align-items: center; justify-content: center; padding: 180px 30px 60px; position: relative; text-align: center; }
+    .hero-card {
+      width: min(1100px, 94%);
+      border-radius: 14px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      padding: 48px;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.02);
+      position: relative;
+      transition: transform 0.5s ease;
+    }
+    .hero-card:hover { transform: translateY(-8px); }
+
+    .headline { font-size: clamp(2rem, 5vw, 2.75rem); line-height: 1.1; font-weight: 700; letter-spacing: -0.01em; color: #fff; text-shadow: 0 6px 30px rgba(0,0,0,0.7); }
+    .headline .accent { font-style: italic; color: var(--accent); font-weight: 600; background: linear-gradient(90deg, #f0c65a, #e8b850); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .sub { margin-top: 1rem; color: var(--muted); font-size: 1rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+
+    .down-arrow {
+      margin-top: 2.25rem; display: inline-block; width: 36px; height: 36px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.06);
+      display: flex; align-items: center; justify-content: center; color: var(--muted); cursor: pointer; transition: all var(--transition);
+    }
+    .down-arrow:hover { transform: translateY(6px); background: rgba(255,255,255,0.05); color: var(--accent); }
+
+    /* GALLERY */
+    .section { padding: 2rem 3rem; }
+    .section-header { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 1.5rem; }
+    .section-title { margin: 0; font-size: 1.75rem; }
+
+    /* Make gallery cards portrait */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr); /* 4 items per row on large screens */
+      gap: 1.25rem;
+      align-items: start;
+    }
+
+    .art-card {
+      background: var(--card);
+      border-radius: 12px;
+      overflow: hidden;
+      aspect-ratio: 3 / 4; /* portrait */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      position: relative;
+      transition: all var(--transition);
+    }
+    .art-card::before { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.3); opacity: 0; transition: opacity var(--transition); }
+    .art-card:hover::before { opacity: 1; }
+
+    .art-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      display: block;
+      transition: transform 0.35s ease;
+    }
+    .art-card:hover img { transform: scale(1.03); }
+
+    .art-card .meta {
+      position: absolute;
+      left: 12px;
+      bottom: 12px;
+      background: rgba(0,0,0,0.45);
+      padding: 8px 10px;
+      border-radius: 8px;
+      font-size: 0.8125rem;
+      color: var(--muted);
+      transform: translateY(10px);
+      opacity: 0;
+      transition: all var(--transition);
+    }
+    .art-card:hover .meta { transform: translateY(0); opacity: 1; }
+    .art-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(0,0,0,0.6); }
+
+    /* ABOUT */
+    .about-content { max-width: 600px; }
+
+    /* COMMISSIONS: grid */
+    .commissions-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr); /* exactly 4 per row on wide screens */
+      gap: 1.25rem;
+      margin-top: 1.25rem;
+    }
+    .commission-card {
+      background: var(--card);
+      padding: 1.25rem;
+      border-radius: 12px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.45);
+      transition: transform var(--transition), box-shadow var(--transition);
+      position: relative;
+      overflow: visible;
+    }
+    .commission-card:hover { transform: translateY(-6px); box-shadow: 0 24px 60px rgba(0,0,0,0.6); }
+    .commission-card h3 { margin-bottom: 0.25rem; font-size: 1.05rem; }
+    .commission-note { margin-top: 0.75rem; color: var(--muted); font-size: 0.95rem; }
+
+    /* ---------- Price sticker styles (new) ---------- */
+    .price-sticker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 0.6rem;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    .orig-price {
+      color: var(--muted);
+      text-decoration: line-through;
+      font-size: 0.95rem;
+      opacity: 0.85;
+    }
+
+    /* Sale badge: red rounded shape with large white sale price and a yellow mini circle for the original smaller price */
+    .sale-badge {
+      display: inline-flex;
+      align-items: center;
+      background: linear-gradient(180deg, #d92d2d, #c31f1f); /* red */
+      padding: 6px 12px;
+      border-radius: 14px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.45);
+      transform: translateY(-2px);
+    }
+
+    .sale-left {
+      display:flex;
+      flex-direction:column;
+      align-items:flex-end;
+      margin-right:8px;
+      line-height:1;
+    }
+    .sale-small {
+      background: #f7d74f; /* yellow pill */
+      padding: 2px 6px;
+      border-radius: 999px;
+      font-weight:700;
+      font-size:0.75rem;
+      color:#111;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.25);
+      transform: translateY(-6px);
+    }
+
+    .sale-price {
+      font-size: 1.55rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      text-shadow: 0 6px 18px rgba(0,0,0,0.45);
+    }
+
+    /* ---------- end sticker styles ---------- */
+
+    /* General notes  */
+    .general-info-grid {
+  max-width: 980px;
+  /* removed margin-left: auto; and margin-right: auto; */
+  margin-left: 0;
+  margin-right: 0;
+  padding: 0 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 1rem; /* tightened spacing compared to before */
+}
+
+
+.notes-columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 1rem;
+}
+.notes-columns ul {
+  list-style: disc;
+  padding-left: 1.2rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+#notes {
+  margin-top: 1.5rem;
+  padding: 1.5rem 3.5rem;
+}
+
+
+
+.contact-click {
+  color: white;
+  text-decoration: underline;
+  cursor: pointer;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.contact-click:hover {
+  color: var(--accent);
+}
+
+    .info-card {
+      background: var(--card);
+      padding: 1.25rem;
+      border-radius: 12px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.45);
+    }
+
+    .info-card h3 { margin-bottom: 0.5rem; color: var(--accent); }
+    .info-card ul { list-style: disc; padding-left: 1.2rem; line-height: 1.6; color: var(--muted); }
+
+    /* Lightbox */
+    .lightbox { display: none; position: fixed; inset: 0; z-index: 120; align-items: center; justify-content: center; background: linear-gradient(180deg, rgba(0,0,0,0.85), rgba(0,0,0,0.95)); padding: 24px; opacity: 0; transition: opacity 0.3s ease; }
+    .lightbox.open { display: flex; opacity: 1; }
+    .lightbox-content { position: relative; max-width: 90vw; max-height: 90vh; width: min(520px, 70%); } /* constrain width for portraits */
+    .lightbox img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      border-radius: 8px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.7);
+    }
+    .lightbox-close { position: absolute; top: -40px; right: 0; background: rgba(255,255,255,0.1); border: none; color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all var(--transition); }
+    .lightbox-close:hover { background: var(--accent); color: #111; }
+
+    .muted { color: var(--muted); font-size: 0.8125rem; }
+    .btn { padding: 8px 12px; border-radius: 8px; border: none; cursor: pointer; transition: all var(--transition); }
+    .btn.ghost { background: transparent; color: var(--muted); border: 1px solid rgba(255,255,255,0.04); }
+    .btn.ghost:hover { background: rgba(255,255,255,0.05); }
+    .btn.primary { background: var(--accent); color: #111; font-weight: 700; }
+    .btn.primary:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(240, 198, 90, 0.3); }
+
+    /* Footer */
+    .site-footer { padding: 3rem; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
+    .social-links { display: flex; gap: 1rem; justify-content: center; margin-top: 1rem; }
+    .social-link { color: var(--muted); transition: all var(--transition); }
+    .social-link:hover { color: var(--accent); transform: translateY(-2px); }
+
+    /* Responsive tweaks */
+    @media (max-width: 1000px) {
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); } /* gallery -> 2 columns */
+      .commissions-grid { grid-template-columns: repeat(2, 1fr); } /* keep 2 columns until narrower */
+      .lightbox-content { width: min(420px, 85%); }
+      .sale-price { font-size: 1.35rem; }
+    }
+
+    @media (max-width: 680px) {
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .commissions-grid { grid-template-columns: repeat(1, 1fr); } /* single column on phones */
+      .general-info-grid { grid-template-columns: repeat(1, 1fr); } /* stack notes on phone */
+      .sale-price { font-size: 1.2rem; }
+    }
+
+    @media (max-width: 480px) {
+      .gallery-grid { grid-template-columns: repeat(1, 1fr); }
+      .sale-price { font-size: 1.05rem; }
+    }
+
+    #about {
+  text-align: center;
+  margin: 0 auto;
+  max-width: 700px; /* optional, for better layout */
+  padding: 2rem 1rem;
+}
+
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header" id="header">
+  <div class="brand">
+    <div class="name">Dinky Ramos</div>
+    <div class="title">• Digital Artist</div>
+  </div>
+  <nav class="center-nav" aria-label="primary">
+    <div class="nav-pill" data-target="about">ABOUT</div>
+    <div class="nav-pill inactive" data-target="work">MY ARTWORKS</div>
+    <div class="nav-pill inactive" data-target="commissions">COMMISSION PRICES</div>
+    <div class="nav-pill inactive" data-target="notes">GENERAL NOTES</div>
+  </nav>
+  <div class="links-right">
+    <a class="ext-link" href="https://www.facebook.com/ArtofDinky?mibextid=ZbWKwL" target="_blank" rel="noopener noreferrer">Facebook ↗</a>
+    <a class="ext-link" href="https://instagram.com/dinkysartworks?igshid=NGVhN2U2NjQ0Yg==" target="_blank" rel="noopener noreferrer">Instagram ↗</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-card">
+    <h1 class="headline">
+      I design worlds, <span class="accent">lightscapes</span> & emotions.
+    </h1>
+    <p class="sub">A curated selection of digital paintings and concepts. Inspired by nature, built with imagination.</p>
+    <div style="display:flex;justify-content:center;">
+      <div class="down-arrow" id="scrollToGallery" title="Scroll to gallery" aria-label="Scroll to gallery">↓</div>
+    </div>
+  </div>
+</section>
+
+<!-- MY ARTWORKS -->
+<section class="section" id="work">
+  <div class="section-header">
+    <div>
+      <h2 class="section-title" style="color: var(--accent);">My Artworks</h2>
+    </div>
+    <div class="muted">Total: <span id="totalCount">6</span></div>
+  </div>
+
+  <div class="gallery-grid" id="gallery">
+    <!-- Example local artwork (portrait-cropped in gallery) -->
+    <div class="art-card" onclick="openLightbox('artworks/1.png')">
+      <img src="artworks/1.png" alt="Silent Horizons — 2023" loading="lazy">
+      <div class="meta">Silent Horizons — 2023</div>
+    </div>
+
+    <div class="art-card" onclick="openLightbox('artworks/2.png')">
+      <img src="artworks/2.png" alt="Piece 2" loading="lazy">
+      <div class="meta">Piece — 2022</div>
+    </div>
+
+    <div class="art-card" onclick="openLightbox('artworks/3.png')">
+      <img src="artworks/3.png" alt="Piece 3" loading="lazy">
+      <div class="meta">Piece — 2021</div>
+    </div>
+
+    <div class="art-card" onclick="openLightbox('artworks/4.png')">
+      <img src="artworks/4.png" alt="Piece 4" loading="lazy">
+      <div class="meta">Piece — 2020</div>
+    </div>
+
+    <div class="art-card" onclick="openLightbox('artworks/5.png')">
+      <img src="artworks/5.png" alt="Piece 5" loading="lazy">
+      <div class="meta">Piece — 2019</div>
+    </div>
+
+    <div class="art-card" onclick="openLightbox('artworks/6.png')">
+      <img src="artworks/6.png" alt="Piece 6" loading="lazy">
+      <div class="meta">Piece — 2018</div>
+    </div>
+  </div>
+</section>
+
+<!-- COMMISSIONS -->
+<section class="section" id="commissions">
+  <div class="section-header" style="align-items:flex-start;">
+    <div>
+      <h2 class="section-title" style="color: var(--accent);">Commission Prices</h2>
+      <div class="muted">Standard personal commissions — prices in USD.</div>
+    </div>
+  </div>
+
+  <div class="commissions-grid">
+    <div class="commission-card">
+      <h3>Head-shot</h3>
+      <div class="muted">Simple head portrait — tight crop, clean background. Great for avatars/profile images. Includes 1 character, 1 revision round.</div>
+
+      <!-- sticker: was $35 -> now $30 -->
+      <div class="price-sticker">
+        <div class="orig-price">$50</div>
+        <div class="sale-badge" aria-hidden="true">
+          <div class="sale-left">
+            <div class="sale-small">Best</div>
+          </div>
+          <div class="sale-price">$40</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="commission-card">
+      <h3>Chest-up</h3>
+      <div class="muted">Head to upper chest — slightly wider than head-shot for more expression/detail. Includes 1 character, 1–2 revision rounds.</div>
+      <!-- sticker: was $45 -> now $40 -->
+      <div class="price-sticker">
+        <div class="orig-price">$60</div>
+        <div class="sale-badge" aria-hidden="true">
+          <div class="sale-left">
+            <div class="sale-small">Deal</div>
+          </div>
+          <div class="sale-price">$50</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="commission-card">
+      <h3>Bust-up</h3>
+      <div class="muted">Head to mid-chest — detailed portrait suitable for prints and banners. Includes 1 character, 2 revision rounds.</div>
+      <!-- sticker: was $50 -> now $45 -->
+      <div class="price-sticker">
+        <div class="orig-price">$80</div>
+        <div class="sale-badge" aria-hidden="true">
+          <div class="sale-left">
+            <div class="sale-small">Save</div>
+          </div>
+          <div class="sale-price">$65</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="commission-card">
+      <h3>Half-body</h3>
+      <div class="muted">Head to waist — full upper-body pose with clothing and basic props. Includes 1 character, simple background, 2 revision rounds.</div>
+      <!-- sticker: was $75 -> now $60 -->
+      <div class="price-sticker">
+        <div class="orig-price">$90</div>
+        <div class="sale-badge" aria-hidden="true">
+          <div class="sale-left">
+            <div class="sale-small">Hot</div>
+          </div>
+          <div class="sale-price">$75</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="commission-card">
+      <h3>Leg-up</h3>
+      <div class="muted">Head to mid-thigh — more of the pose and outfit visible. Includes 1 character, simple background, 2 revision rounds.</div>
+      <!-- sticker: was $85 -> now $70 -->
+      <div class="price-sticker">
+        <div class="orig-price">$105</div>
+        <div class="sale-badge" aria-hidden="true">
+          <div class="sale-left">
+            <div class="sale-small">Sale</div>
+          </div>
+          <div class="sale-price">$90</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="commission-card">
+      <h3>Full-body</h3>
+      <div class="muted">Complete character from head to toe — full pose, clothing detail, and basic environment. Includes 1 character, 2 revision rounds.</div>
+      <!-- sticker: was $110 -> now $90 -->
+      <div class="price-sticker">
+        <div class="orig-price">$125</div>
+        <div class="sale-badge" aria-hidden="true">
+          <div class="sale-left">
+            <div class="sale-small">Best</div>
+          </div>
+          <div class="sale-price">$110</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="commission-card">
+      <h3>Extras & Usage</h3>
+      <div class="muted">Commercial license, extra characters, rush delivery, and complex backgrounds are priced separately.</div>
+      <div class="commission-price">Custom quotes</div>
+      <div class="commission-note">Email with reference images, intended use, and deadline for an accurate quote: <a href="mailto:hello@dinkyramos.art" style="color:var(--accent);text-decoration:none">hello@dinkyramos.art</a>.</div>
+    </div>
+  </div>
+
+</section>
+
+
+
+  <!-- GENERAL NOTES -->
+<div id="notes">
+  <h3 style="color: var(--accent);">General Notes</h3>
+  <div class="notes-columns">
+    <ul>
+      <li>If you're interested in a commission, you are free to contact me on Facebook, Instagram, TikTok (<strong>DinkysArtworks</strong>) or my Gmail (<strong>ramosdinky11@gmail.com</strong>).</li>
+      <li>You can complain if I forgot some of the details of your commission.</li>
+      <li>Send me your full description, info, details, or important reference of your character.</li>
+      <li>First come, first serve.</li>
+      <li>I usually finish my commission in 1 to 2 weeks.</li>
+      <li>I will refuse to work on a commission if it's too complex or complicated for me.</li>
+      <li>Giving a deadline is not allowed — I don’t want to rush my work.</li>
+      <li>Once I finish your commission, I will send you the final result on Google Drive with a high-quality photo and link.</li>
+      <li>Payment can be half-half or full payment — whatever you are comfortable with. I just need first payment to prevent being scammed.</li>
+      <li>Payment after sketch.</li>
+      <li>Payment method: PayPal only.</li>
+    </ul>
+
+    <ul>
+      <li>(Please read my terms and conditions)</li>
+      <li>Read more info below.</li>
+      <li><strong>TAT:</strong> Bust-up, chest-up, and head shot (4–6 days)</li>
+      <li>Half-body, knee-up, leg-up, and full body (1–2 weeks)</li>
+      <li>Time depends on complexity.</li>
+      <li>I have to decline the commission if I can’t do it or if it’s too complex for me.</li>
+      <li>I need your complete details for your commission — send to my Gmail or DM me.</li>
+      <li>Giving a deadline is not allowed — I don’t want to rush my work.</li>
+      <li>No refund.</li>
+      <li>For examples, check my Instagram and Facebook page: <strong>DinkysArtworks</strong></li>
+      <li>Payment method: half-half or full payment (optional).</li>
+      <li>Payment after sketch.</li>
+    </ul>
+  </div>
+</div>
+
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="about-content">
+    <h2 class="section-title">About</h2>
+    <p class="muted">
+      I'm a digital artist who loves turning ideas into eye-catching visuals. My work plays with color, texture, and mood to bring stories to life.
+      I enjoy experimenting with different styles, from sleek and modern to bold and abstract.
+      Whether it's for personal passion projects or client commissions, I aim to create art that connects with people and leaves an impression.
+    </p>
+    <p class="muted" style="margin-top: 1rem;">
+  <strong>Contact:</strong>
+  <a href="https://www.facebook.com/ArtofDinky?mibextid=ZbWKwL" class="contact-click">Dinky Ramos</a>
+</p>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <p class="muted">© <span id="year"></span> Dinky Ramos. All rights reserved.</p>
+</footer>
+
+<!-- Lightbox -->
+<div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
+  <div class="lightbox-content">
+    <button class="lightbox-close" aria-label="Close lightbox">×</button>
+    <img id="lightboxImg" src="" alt="Artwork large">
+  </div>
+</div>
+
+<script>
+  // DOM elements
+  const gallery = document.getElementById('gallery');
+  const totalCount = document.getElementById('totalCount');
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const header = document.getElementById('header');
+  const currentYear = new Date().getFullYear();
+
+  // Initialize
+  document.getElementById('year').textContent = currentYear;
+  totalCount.textContent = gallery ? gallery.querySelectorAll('.art-card').length : 0;
+
+  // Header scroll effect
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 100) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+  });
+
+  // Lightbox functions
+  function openLightbox(src) {
+    try {
+      lightboxImg.src = typeof src === 'string' ? src.replace('w=600', 'w=1400') : src;
+    } catch (e) {
+      lightboxImg.src = src;
+    }
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox(e) {
+    if (e.target === lightbox || e.target.classList.contains('lightbox-close')) {
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+      lightboxImg.src = '';
+    }
+  }
+
+  // Navigation pills behaviour (smooth scroll & active states)
+  document.querySelectorAll('.nav-pill').forEach(el => {
+    el.addEventListener('click', () => {
+      const tgt = el.dataset.target;
+      const targetEl = document.getElementById(tgt);
+      if (targetEl) {
+        const headerOffset = header.offsetHeight + 16;
+        const elementPosition = targetEl.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({ top: elementPosition - headerOffset, behavior: 'smooth' });
+      }
+      document.querySelectorAll('.nav-pill').forEach(p => p.classList.add('inactive'));
+      el.classList.remove('inactive');
+    });
+  });
+
+  // Make gallery arrow scroll to gallery and set active nav
+  const scrollToGalleryBtn = document.getElementById('scrollToGallery');
+  if (scrollToGalleryBtn) {
+    scrollToGalleryBtn.addEventListener('click', () => {
+      const targetEl = document.getElementById('work');
+      const headerOffset = header.offsetHeight + 16;
+      const elementPosition = targetEl.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({ top: elementPosition - headerOffset, behavior: 'smooth' });
+
+      document.querySelectorAll('.nav-pill').forEach(p => p.classList.add('inactive'));
+      const workNav = document.querySelector('.nav-pill[data-target="work"]');
+      if (workNav) workNav.classList.remove('inactive');
+    });
+  }
+
+  // Keyboard navigation for lightbox
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {s
+      closeLightbox({ target: lightbox });
+    }
+  });
+
+  // Preload hero image for better LCP
+  if (window.matchMedia('(min-width: 768px)').matches) {
+    const img = new Image();
+    img.src = 'https://images.unsplash.com/photo-1549880338-65ddcdfd017b?q=80&w=1400&auto=format&fit=crop&crop=entropy';
+  }
+  let lastScrollY = window.scrollY;
+let isScrollingDown = false;
+
+window.addEventListener('scroll', () => {
+  const currentScrollY = window.scrollY;
+
+  if (currentScrollY > lastScrollY && currentScrollY > 100) {
+    // Scrolling down
+    if (!isScrollingDown) {
+      header.classList.add('hide-header');
+      isScrollingDown = true;
+    }
+  } else {
+    // Scrolling up
+    if (isScrollingDown) {
+      header.classList.remove('hide-header');
+      isScrollingDown = false;
+    }
+  }
+
+  lastScrollY = currentScrollY;
+});
+
+</script>
+</body>
+</html>
